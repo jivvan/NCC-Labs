@@ -1,0 +1,54 @@
+@page
+@model UpsertModel
+@{
+    ViewData["Title"] = Model.EditId == null ? "Create Book" : "Edit Book";
+}
+
+<div class="container">
+    @if (Model.EditId != null)
+    {
+        <h1 class="card-title">Edit Book</h1>
+        <h4>Edit a book</h4>
+    }
+    else
+    {
+        <h1 class="card-title">Create Book</h1>
+        <h4>Insert a new book to database</h4>
+    }
+
+    <hr />
+
+    <form method="post">
+        <input type="number" hidden asp-for="@Model.Book.Id">
+        <div class="form-group">
+            <label asp-for="@Model.Book.Title" class="control-label">Title</label>
+            <input asp-for="@Model.Book.Title" class="form-control" />
+            <span asp-validation-for="@Model.Book.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Book.Author" class="control-label">Author</label>
+            <input asp-for="@Model.Book.Author" class="form-control" />
+            <span asp-validation-for="@Model.Book.Author" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Book.Genre" class="control-label">Genre</label>
+            <input asp-for="@Model.Book.Genre" class="form-control" />
+            <span asp-validation-for="@Model.Book.Genre" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Book.ISBN" class="control-label">ISBN</label>
+            <input asp-for="@Model.Book.ISBN" class="form-control" />
+            <span asp-validation-for="@Model.Book.ISBN" class="text-danger"></span>
+        </div>
+        <br>
+        @if (Model.EditId == null)
+        {
+            <button type="submit" class="btn btn-primary">Create</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">Update</button>
+        }
+        <a asp-page="Index" class="btn btn-secondary">Back to List</a>
+    </form>
+</div>

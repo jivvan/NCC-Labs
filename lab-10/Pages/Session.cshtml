@@ -1,0 +1,11 @@
+@page
+@model SessionModel
+@{
+    ViewData["Title"] = "Display Page";
+}
+
+<h1>Student Information:</h1>
+<h4>This data is stored in session.</h4>
+<p>First Name: @HttpContext.Session.GetString("FirstName")</p>
+<p>Last Name: @HttpContext.Session.GetString("LastName")</p>
+<p>Email: @HttpContext.Session.GetString("Email")</p>

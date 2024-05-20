@@ -1,0 +1,41 @@
+﻿@page
+@model CalculatorModel
+@{
+    ViewData["Title"] = "Calculator";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the calculator!</h1>
+    <p>You can perform some basic arithmetic operations from this page.</p>
+    <form method="post" class="text-start">
+        <div class="mb-3">
+            <label for="number1" class="form-label">First number</label>
+            <input asp-for="@Model.Calculator.Number1" name="number1" type="number" class="form-control" id="number1"
+                placeholder="Enter a number" required>
+        </div>
+        <div class="mb-3">
+            <label for="number2" class="form-label">Second number</label>
+            <input asp-for="@Model.Calculator.Number2" name="number2" type="number" class="form-control" id="number2"
+                placeholder="Enter a number" required />
+        </div>
+        <div class="mb-3">
+            <label for="operation" class="form-label">Operation</label>
+            <select asp-for="@Model.Calculator.Operation" name="operation" id="operation" class="form-select"
+                aria-label="Select an opearator">
+                <option value="addition">Addition</option>
+                <option value="subtraction">Subtraction</option>
+                <option value="multiplication">Multiplication</option>
+                <option value="division">Division</option>
+            </select>
+        </div>
+        @if (Model.Calculator != null)
+        {
+            <h2>The result is: @Model.Calculator.Result</h2>
+        }
+        @if (!string.IsNullOrEmpty(Model.Calculator?.ErrorMessage))
+        {
+            <h3 style="color: red;">@Model.Calculator.ErrorMessage</h3>
+        }
+        <input type="submit" value="Calculate" class="btn btn-primary">
+    </form>
+</div>

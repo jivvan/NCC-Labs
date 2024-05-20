@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Books";
+}
+
+<h1>Books</h1>
+
+
+<p>
+    <a asp-page="Upsert" class="btn btn-primary">Create New Book</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>ISBN</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model.Books)
+        {
+            <tr>
+                <td>@book.Id</td>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.Genre</td>
+                <td>@book.ISBN</td>
+                <td>
+                    <a asp-page="/Upsert" asp-route-id="@book.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-page="/DeleteBook" asp-route-id="@book.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

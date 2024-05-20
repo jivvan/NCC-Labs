@@ -1,0 +1,11 @@
+@page
+@model CookiesModel
+@{
+    ViewData["Title"] = "Display Page";
+}
+
+<h1>Student Information:</h1>
+<h4>This data is stored in cookies.</h4>
+<p>First Name: @Request.Cookies["FirstName"]</p>
+<p>Last Name: @Request.Cookies["LastName"]</p>
+<p>Email: @Request.Cookies["Email"]</p>
