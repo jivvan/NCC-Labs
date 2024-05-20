@@ -1,19 +1,40 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using models;
 
 namespace lab_8.Pages;
 
-public class PrivacyModel : PageModel
+public class StudentModel : PageModel
 {
-    private readonly ILogger<PrivacyModel> _logger;
+    public StudentRepository _repository;
+    public List<Student> Students { get; set; }
 
-    public PrivacyModel(ILogger<PrivacyModel> logger)
+    [BindProperty]
+    public Student Student { get; set; }
+
+    public StudentModel(StudentRepository repository)
     {
-        _logger = logger;
+        _repository = repository;
     }
 
     public void OnGet()
     {
+        Student = new Student();
+        Students = _repository.GetStudents();
+    }
+
+    public IActionResult OnPost()
+    {
+        if (ModelState.IsValid)
+        {
+            _repository.AddStudent(Student);
+            Response.Redirect("/Student");
+            Students = _repository.GetStudents();
+            Student = new Student();
+            return Page();
+        }
+        return Page();
     }
 }
 

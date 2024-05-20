@@ -1,7 +1,10 @@
+using data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton(new StudentRepository(connectionString: builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
